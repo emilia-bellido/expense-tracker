@@ -4,10 +4,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="wnameth=device-wnameth, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Expense Tracker App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"> <!-----bootstrap icons--->
+      <!---JQUERY--->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
   </head>
   <body>
     
@@ -41,12 +43,49 @@
 
     <!--TRANSACTIONS VIEWER--->
     <section class="container p-3 mb-2 bg-light text-dark rounded">
-      <h3> Recent Transactions</h3>
-      <!---table--->
-      <div>
-        list
-      </div>
+
+        <h3> Recent Transactions</h3>
+        <button class="btn btn-primary" id="view-transaction">View Transactions</button>
+        <div id="transactions-holder" style="display:none">
+          <?php
+                try{
+                   
+
+                    //QUERY to select all transactions from database;
+                    $query = "SELECT * FROM `transactions` ORDER BY date " ;
+
+                    //submitting query to database
+                    $statement = $pdo->prepare($query);
+
+                    //running the query
+                    $statement->execute();
+
+                    //checking to see if there is any data or not
+                    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+                        echo $row['description'] . "<br>";
+                    }
+                        
+                }catch(PDOException $e){
+                    die("Query Failed: " . $e->getMessage());
+                } 
+        
+
+          
+
+          ?>
+        </div>
+
+
+
+
+
+
+
     </section>
+    <!--TRANSACTIONS VIEWER--->
+
+
+
 
      <!--ADD A TRANSACTION--->
     <section class="container p-3 mb-2 bg-light text-dark rounded">
@@ -108,7 +147,7 @@
 
 
 
-
+    <script src="scripts/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
 </html>
