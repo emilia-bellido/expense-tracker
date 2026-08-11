@@ -1,4 +1,7 @@
-<?php require "./includes/dbh.inc.php" ?>
+<?php 
+  require "./includes/dbh.inc.php";
+  require "./includes/transactionselect.inc.php"; 
+?>
 
 <!doctype html>
 <html lang="en">
@@ -37,8 +40,9 @@
           <p>
             <?php echo number_format($total_expenses, 2); ?>
           </p>
-        </div> <!-- Closes the Total Expenses div -->
-      </div> <!-- ADDED MISSING DIV: Closes the d-flex container -->
+        </div> 
+      </div> 
+
     </section>
 
     <!--TRANSACTIONS VIEWER--->
@@ -47,39 +51,30 @@
         <h3> Recent Transactions</h3>
         <button class="btn btn-primary" id="view-transaction">View Transactions</button>
         <div id="transactions-holder" style="display:none">
-          <?php
-                try{
-                   
-
-                    //QUERY to select all transactions from database;
-                    $query = "SELECT * FROM `transactions` ORDER BY date " ;
-
-                    //submitting query to database
-                    $statement = $pdo->prepare($query);
-
-                    //running the query
-                    $statement->execute();
-
-                    //checking to see if there is any data or not
-                    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-                        echo $row['description'] . "<br>";
-                    }
-                        
-                }catch(PDOException $e){
-                    die("Query Failed: " . $e->getMessage());
-                } 
-        
-
-          
-
-          ?>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--Loop through my trasanctions array and input all the content into the table--->
+              <?php foreach($transactions as $input): ?>
+                <tr>
+                  <td> <?php echo htmlspecialchars($input['date']); ?></td>
+                  <td> <?php echo htmlspecialchars($input['description']); ?></td>
+                  <td> <?php echo htmlspecialchars($input['category']); ?></td>
+                  <td> $ <?php echo htmlspecialchars($input['amount']); ?></td>
+                  <td> <?php echo htmlspecialchars($input['type']); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
         </div>
-
-
-
-
-
-
 
     </section>
     <!--TRANSACTIONS VIEWER--->

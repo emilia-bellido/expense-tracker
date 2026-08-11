@@ -1,6 +1,7 @@
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $transactions = [];
+
     try{
         //grabbing connection to databse
         require_once "dbh.inc.php";
@@ -14,20 +15,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         //running the query
         $statement->execute();
 
-        //checking to see if there is any data or not
-        while($row = $statement->fetch()){
-            echo $row['description'] . "<br>";
-        }
+        //fetching all the transactions so they are in an array and can access it through index.php
+  
+        $transactions = $statement->fetchALL(PDO::FETCH_ASSOC);
             
     }catch(PDOException $e){
         die("Query Failed: " . $e->getMessage());
     } 
 
 
-
-}else{
-
-}
+?>
     
 
 
