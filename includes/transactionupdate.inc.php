@@ -9,7 +9,7 @@
          $id = $_POST["id"];
         $description = htmlspecialchars($_POST["desc"]);
         $category = htmlspecialchars($_POST["category"]);
-        $amount = htmlspecialchars($_POST["amount"]);
+        $amount = (double)$_POST["amount"];
         $date = htmlspecialchars($_POST["date"]);
         $type = htmlspecialchars($_POST["type"]);
 
