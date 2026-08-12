@@ -64,6 +64,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Type</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -75,7 +76,11 @@
                   <td> <?php echo htmlspecialchars($input['category']); ?></td>
                   <td> $ <?php echo htmlspecialchars($input['amount']); ?></td>
                   <td> <?php echo htmlspecialchars($input['type']); ?></td>
-                </tr>
+                  <td> 
+                    <a href="includes/transactiondelete.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-danger">Delete</a>
+                    <a href="includes/transactionupdate.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-warning">Update</a>                    </a>
+                  </td>
+                </tr> 
               <?php endforeach; ?>
             </tbody>
           </table>
