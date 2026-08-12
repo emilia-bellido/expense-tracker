@@ -5,7 +5,19 @@ $(document).ready(function () {
 
     //toggle to view trasnactions
     $("#view-transaction").on("click", (e) => {
-       
+
+        let currentText = $("#button-text").text().trim();
+        
+        // 2. Make sure the text here...
+        if(currentText === "Hide Recent Transactions"){
+            $("#button-text").text("View Recent Transactions");
+        } else {
+            // ...exactly matches the text here!
+            $("#button-text").text("Hide Recent Transactions");
+        }
+        
+        // 3. Remove "bi " from the toggle so you don't break the icon base class
+        $("#arrow").toggleClass("bi-arrow-down bi-arrow-up");
         $("#transactions-holder").fadeToggle(200);
     
 
