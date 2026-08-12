@@ -14,7 +14,7 @@ try{
               
     $total_income = $result["total_income"];
     if ($total_income > 0) {
-        $total_income = number_format($total_income, 2);
+        $total_income;
     } else {
         $total_income = 0;
     }
@@ -31,7 +31,7 @@ try{
               
     $total_expenses = $result["total_expenses"];
     if ($total_expenses > 0) {
-       $total_expenses = number_format($total_expenses, 2);
+       $total_expenses;
     } else {
         $total_expenses = 0;
     }
@@ -39,6 +39,10 @@ try{
 
     //query to calculate balance
     $total_balance = $total_income - $total_expenses;
+    
+    $total_income_formatted = number_format($total_income, 2);
+    $total_expenses_formatted = number_format($total_expenses, 2);
+    $total_balance_formatted = number_format($total_balance, 2);
     
 
 

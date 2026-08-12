@@ -14,91 +14,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"> <!-----bootstrap icons--->
       <!---JQUERY--->
     <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cantata+One&family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="scripts/style.css">
   </head>
-  <body>
+  <body class= "p-5">
+    
 
-  
-  
-    <h1 class="text-center"> Expense Tracker App</h1>
+    <h1 class="text-center my-5 text-light title"> Expense Tracker App</h1>
 
-    <section class="container p-3 mb-2 bg-light text-dark rounded"> <!--summary box-->
-      <div class="align-items-center justify-content-between p-3 mb-2 bg-light text-dark rounded">
-        <h3>Total Balance</h3>
-        <p>
-           <?php 
-           echo number_format($total_balance, 2);
-       
-            ?>
+    <section class="container mb-4 p-5 glass-card text-dark shadow"> <!--summary box-->
+
+      <div class=" d-flex flex-wrap align-items-center justify-content-around p-3 mb-2 glass-boxes">
+        <h3 class="text-center title-boxes">Total Balance</h3>
+        <p class="text-center summary-nums" id="total_num">
+           <?php echo $total_balance_formatted; ?>
         </p>
       </div>
 
-      <div class="d-flex align-items-center justify-content-between p-3 mb-2 bg-light text-dark rounded">
-        <div>
-          <h3>Total Income</h3>
-          <p>
-             <?php echo $total_income?>
+      <div class="d-flex flex-wrap align-items-center justify-content-around p-3 m-2">
+
+        <div class=" p-3 mb-2 text-dark glass-boxes">
+          <h3 class="text-center title-boxes">Total Income</h3>
+          <p class="text-center summary-nums">
+             <?php echo $total_income_formatted?>
           </p>
         </div>
 
-        <div>
-          <h3>Total Expenses</h3>
-          <p>
-            <?php echo $total_expenses?>
+        <div class=" p-3 mb-2 text-dark glass-boxes">
+          <h3 class="text-center title-boxes">Total Expenses</h3>
+          <p class="text-center summary-nums">
+            <?php echo $total_expenses_formatted?>
             
           </p>
         </div> 
       </div> 
 
     </section>
-
-    <!--TRANSACTIONS VIEWER--->
-    <section class="container p-3 mb-2 bg-light text-dark rounded">
-
-        <h3> Recent Transactions</h3>
-        <button class="btn btn-primary" id="view-transaction">View Transactions</button>
-        <div id="transactions-holder" style="display:none">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Type</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!--Loop through my trasanctions array and input all the content into the table--->
-              <?php foreach($transactions as $input): ?>
-                <tr>
-                  <td> <?php echo htmlspecialchars($input['date']); ?></td>
-                  <td> <?php echo htmlspecialchars($input['description']); ?></td>
-                  <td> <?php echo htmlspecialchars($input['category']); ?></td>
-                  <td> $ <?php echo htmlspecialchars($input['amount']); ?></td>
-                  <td> <?php echo htmlspecialchars($input['type']); ?></td>
-                  <td> 
-                    <!---the "?" includes the id of the record in the GET URL so when passed on to php file it knows what record to delete--->
-                    <a href="includes/transactiondelete.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-danger">Delete</a>
-                    <a href="edit.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-warning">Update</a>
-                    <!--<button type="button" class="update-btn btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalUpdate" data-id="<?php echo htmlspecialchars($input['id']); ?>">Update</button>-->
-                  </td>
-                </tr> 
-              <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-
-    </section>
-    <!--TRANSACTIONS VIEWER--->
-
-
-
-
      <!--ADD A TRANSACTION--->
-    <section class="container p-3 mb-2 bg-light text-dark rounded">
-      
-      <form action="includes/formhandler.inc.php" method="post">
+    <section class="container p-3 mb-2 text-light glass-boxes">
+      <h3 class="text-center my-5 text-light title"> Add Transaction </h3>
+
+      <form  id="form-add" action="includes/formhandler.inc.php" method="post" class="m-5"> 
 
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
@@ -106,13 +64,15 @@
         </div>
 
         <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
           <select class="form-select" aria-label="category" name="category">
-            <option selected>Category</option>
+            <option selected></option>
             <option value="food">Food</option>
             <option value="transport">Transport</option>
             <option value="bills">Bills</option>
             <option value="rent">Rent</option>
             <option value="entertainment">Entertainment</option>
+            <option value="entertainment">Income</option>
             <option value="income">Other</option>
           </select>
         </div>
@@ -128,20 +88,87 @@
         </div>
 
         <div class="mb-3">
+          <label for="type" class="form-label">Type of Transaction</label>
           <select class="form-select" aria-label="type" name="type">
-            <option selected>Type of Transaction</option>
+            <option selected></option>
             <option value="expense">Expense</option>
             <option value="income">Income</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn">Add Transaction</button>
       </form>
 
 
 
 
     </section>
+    <!--TRANSACTIONS VIEWER--->
+    <section class="container p-3 my-2 text-dark glass-boxes">
+        <div class="d-flex justify-content-between">
+          <h3 class="title text-light"> Recent Transactions</h3>
+          <button class="btn" id="view-transaction"><i class="bi bi-arrow-down"></i>View Recent Transactions</button>
 
+
+
+        </div>
+        
+        
+
+        <div id="transactions-holder" style="display:none">
+          <table class="table table-borderless text-light mt-3" style="--bs-table-bg: none;" id="table-transactions">
+            <thead>
+              <tr>
+                <th class="text-light" scope="col">Date</th>
+                <th class="text-light" scope="col">Description</th>
+                <th class="text-light" scope="col">Category</th>
+                <th class="text-light" scope="col">Amount</th>
+                <th class="text-light" scope="col">Type</th>
+                <th class="text-light" scope="col"></th>
+              </tr>
+            </thead>
+            <tbody class="text-light">
+              <?php if(empty($transactions)): ?>
+              <tr>
+                <td class="text-center title text-light"colspan="6"> No Transactions Yet. Add your first one! </td>
+              </tr>  
+              <?php else: ?>
+              <!--Loop through my trasanctions array and input all the content into the table--->
+                <?php foreach($transactions as $input): ?>
+                  <tr class="text-light">
+                    <td class="text-light"> <?php echo htmlspecialchars($input['date']); ?></td>
+                    <td class="text-light"> <?php echo htmlspecialchars($input['description']); ?></td>
+                    <td class="text-light"> <?php echo htmlspecialchars($input['category']); ?></td>
+                    <td class="text-light"> $ <?php echo htmlspecialchars($input['amount']); ?></td>
+                    <td class="text-light"> <?php echo htmlspecialchars($input['type']); ?></td>
+                    <td class="d-flex align-items-center justify-content-around"> 
+                      <!---the "?" includes the id of the record in the GET URL so when passed on to php file it knows what record to delete--->
+                      <a href="includes/transactiondelete.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-danger">Delete</a>
+                      <a href="edit.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-warning">Update</a>
+                    </td>
+                  </tr> 
+                <?php endforeach; ?>
+              <?php endif; ?>  
+            </tbody>
+          </table>
+        </div>
+
+    </section>
+    <!--TRANSACTIONS VIEWER--->
+
+   <!-- TOAST CONTAINER (Positioned at the bottom-right corner) -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      
+      <!-- THE ERROR TOAST -->
+      <div id="error-toast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <strong>Cannot submit form!</strong> Please fill out all required fields.
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+
+    </div>
 
     
 
