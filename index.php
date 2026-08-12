@@ -16,7 +16,8 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
   </head>
   <body>
-    
+
+  
   
     <h1 class="text-center"> Expense Tracker App</h1>
 
@@ -77,8 +78,10 @@
                   <td> $ <?php echo htmlspecialchars($input['amount']); ?></td>
                   <td> <?php echo htmlspecialchars($input['type']); ?></td>
                   <td> 
+                    <!---the "?" includes the id of the record in the GET URL so when passed on to php file it knows what record to delete--->
                     <a href="includes/transactiondelete.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-danger">Delete</a>
-                    <a href="includes/transactionupdate.inc.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-warning">Update</a>                    </a>
+                    <a href="edit.php?id=<?php echo htmlspecialchars($input['id']); ?>" class="btn btn-outline-warning">Update</a>
+                    <!--<button type="button" class="update-btn btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalUpdate" data-id="<?php echo htmlspecialchars($input['id']); ?>">Update</button>-->
                   </td>
                 </tr> 
               <?php endforeach; ?>

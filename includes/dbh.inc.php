@@ -11,18 +11,3 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 } 
-
-/*function getCategories(){
-    $pdo = databaseConnection();
-
-    if(!$pdo){
-        return false;
-    }
-
-    $response = $pdo->query("SELECT * FROM category");
-    while($row = $response->fetch_assoc()){
-        $data[] = $row;
-    }
-
-    return $data
-})*/
