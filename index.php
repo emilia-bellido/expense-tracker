@@ -1,6 +1,7 @@
 <?php 
   require "./includes/dbh.inc.php";
   require "./includes/transactionselect.inc.php"; 
+  require "./includes/formulas.inc.php";
 ?>
 
 <!doctype html>
@@ -23,7 +24,10 @@
       <div class="align-items-center justify-content-between p-3 mb-2 bg-light text-dark rounded">
         <h3>Total Balance</h3>
         <p>
-          <?php echo number_format($total_balance, 2); ?>
+           <?php 
+           echo number_format($total_balance, 2);
+       
+            ?>
         </p>
       </div>
 
@@ -31,14 +35,15 @@
         <div>
           <h3>Total Income</h3>
           <p>
-            <?php echo number_format($total_income, 2); ?>
+             <?php echo $total_income?>
           </p>
         </div>
 
         <div>
           <h3>Total Expenses</h3>
           <p>
-            <?php echo number_format($total_expenses, 2); ?>
+            <?php echo $total_expenses?>
+            
           </p>
         </div> 
       </div> 
