@@ -104,9 +104,11 @@
     </section>
     <!--TRANSACTIONS VIEWER--->
     <section class="container p-3 my-2 text-dark glass-boxes">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between flex-wrap">
           <h3 class="title text-light"> Recent Transactions</h3>
-          <button class="btn" id="view-transaction"><i class="bi bi-arrow-down"></i>View Recent Transactions</button>
+          <button class="btn text-light" id="view-transaction">
+            <i id="arrow" class="bi bi-arrow-down"></i>
+            <span id="button-text"> View Recent Transactions</span> </button>
 
 
 
@@ -114,7 +116,7 @@
         
         
 
-        <div id="transactions-holder" style="display:none">
+        <div id="transactions-holder" class="table-responsive" style="display:none">
           <table class="table table-borderless text-light mt-3" style="--bs-table-bg: none;" id="table-transactions">
             <thead>
               <tr>
