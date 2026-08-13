@@ -8,40 +8,33 @@ $(document).ready(function () {
 
         let currentText = $("#button-text").text().trim();
         
-        // 2. Make sure the text here...
         if(currentText === "Hide Recent Transactions"){
             $("#button-text").text("View Recent Transactions");
         } else {
             // ...exactly matches the text here!
             $("#button-text").text("Hide Recent Transactions");
         }
-        
-        // 3. Remove "bi " from the toggle so you don't break the icon base class
+
         $("#arrow").toggleClass("bi-arrow-down bi-arrow-up");
         $("#transactions-holder").fadeToggle(200);
     
 
     });
 
-
-    let total = $("#total_num").text().trim();
-    console.log(total);
-
-
-    //styling for the total balance
-    if(total >= 0 ){
-        $("#total_num").removeClass("danger");
-        $("#total_num").addClass("success");
-        console.log("no debt")
-    }else{
-        $("#total_num").removeClass("success");
-        $("#total_num").addClass("danger");
-        console.log("you broke");
-    }
-
+        let total = parseFloat($("#total_num").data("value"));
+        console.log(total);
+        //styling for the total balance
+        if (total >= 0) {
+            $("#total_num").removeClass("danger");
+            $("#total_num").addClass("success");
+        } else {
+            $("#total_num").removeClass("success");
+            $("#total_num").addClass("danger");
+        };
     //adding a transaction form validation 
 
     const toast = $("#error-toast");
+    const toastInstance = new bootstrap.Toast(toast);
 
     $("#form-add").on("submit", (e) =>{
 
@@ -53,7 +46,7 @@ $(document).ready(function () {
          
         if (desc === "" || amount === "" || date === "" || category === "" || type === "") {
             e.preventDefault();
-            toast.show();
+            toastInstance.show();
             
         }
 

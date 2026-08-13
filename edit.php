@@ -32,7 +32,7 @@
       <h3 class="text-center mt-5 mb-3 text-light title"> Udpate Your Transaction </h3>
       <form class ="p-5" action="includes/transactionupdate.inc.php" method="post">
 
-         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+         <input type="hidden" name="id" value="<?= htmlspecialchars($id)?>">
 
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
@@ -45,7 +45,7 @@
 
                 <?php
                 //For each: goes through my array of categories and when the category from the record matches it, the selected word is included in the option. 
-                    $categories = ["food", "transport", "bills", "rent" , "entertainment","Income", "other"];
+                    $categories = ["Food", "Transport", "Bills", "Rent" , "Entertainment", "Income", "Other"];
 
                     //for each does it for every single category, and writes it as an option
                     foreach($categories as $option):
