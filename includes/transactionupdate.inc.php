@@ -6,7 +6,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
         //htmlspecialchars converts into HTML entities -> prevents code injection
-         $id = $_POST["id"];
+        $id = $_POST["id"];
         $description = htmlspecialchars($_POST["desc"]);
         $category = htmlspecialchars($_POST["category"]);
         $amount = (double)$_POST["amount"];
@@ -26,7 +26,7 @@
             WHERE `id` = ?;";
 
             $statement = $pdo->prepare($query);
-            $statement->execute([$description,$category,$amount, $date, $type, $id]);
+            $statement->execute([$description, $category, $amount, $date, $type, $id]);
 
             //close connection
             $pdo = null;

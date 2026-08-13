@@ -28,9 +28,10 @@
 
       <div class=" d-flex flex-wrap align-items-center justify-content-around p-3 mb-2 glass-boxes">
         <h3 class="text-center title-boxes">Total Balance</h3>
-        <p class="text-center summary-nums" id="total_num">
+        <p class="text-center summary-nums" id="total_num data-value="<?= $total_balance ?>">
            <?php echo $total_balance_formatted; ?>
         </p>
+      
       </div>
 
       <div class="d-flex flex-wrap align-items-center justify-content-around p-3 m-2">
@@ -72,8 +73,8 @@
             <option value="bills">Bills</option>
             <option value="rent">Rent</option>
             <option value="entertainment">Entertainment</option>
-            <option value="entertainment">Income</option>
-            <option value="income">Other</option>
+            <option value="income">Income</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
@@ -104,20 +105,16 @@
     </section>
     <!--TRANSACTIONS VIEWER--->
     <section class="container p-3 my-2 text-dark glass-boxes">
-        <div class="d-flex justify-content-between flex-wrap">
+        <div class="d-flex justify-content-between flex-wrap mb-3">
           <h3 class="title text-light"> Recent Transactions</h3>
           <button class="btn text-light" id="view-transaction">
             <i id="arrow" class="bi bi-arrow-down"></i>
             <span id="button-text"> View Recent Transactions</span> </button>
-
-
-
         </div>
-        
-        
+      
 
         <div id="transactions-holder" class="table-responsive" style="display:none">
-          <table class="table table-borderless text-light mt-3" style="--bs-table-bg: none;" id="table-transactions">
+          <table class="table table-borderless text-light" style="--bs-table-bg: none;" id="table-transactions">
             <thead>
               <tr>
                 <th class="text-light" scope="col">Date</th>
@@ -125,7 +122,7 @@
                 <th class="text-light" scope="col">Category</th>
                 <th class="text-light" scope="col">Amount</th>
                 <th class="text-light" scope="col">Type</th>
-                <th class="text-light" scope="col"></th>
+                <th class="text-light text-center" scope="col">Action</th>
               </tr>
             </thead>
             <tbody class="text-light">
