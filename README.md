@@ -50,7 +50,7 @@ Single table: `transactions`
 | `id` | INT, AUTO_INCREMENT, PRIMARY KEY | Unique record ID |
 | `description` | VARCHAR(100) | Short description of the transaction |
 | `category` | ENUM | One of: 'Food','Transport','Bills','Rent','Entertainment','Income','Other' |
-| `amount` | Double | Transaction amount |
+| `amount` | DOUBLE | Transaction amount |
 | `date` | DATE | Transaction date |
 | `type` | ENUM | expense or income |
 
@@ -84,7 +84,7 @@ CREATE TABLE `transactions` (
 
 - All user input is passed through `htmlspecialchars()` before being displayed or stored, to prevent injected HTML/script content.
 - All database queries use PDO prepared statements with parameterized placeholders (`?`), preventing SQL injection.
-- Submitted amounts are explicitly cast to a numeric type (`(float)`) before being stored.
+- Submitted amounts are explicitly cast to a numeric type (`(double)`) before being stored.
 - This project currently has no user authentication: it's a local single-user demonstration project, not intended for multi-user or production use as-is.
 
 ## Known Limitations / Possible Future Improvements
