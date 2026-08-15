@@ -1,5 +1,6 @@
 <?php
 
+//Cheks any emtpy input when a user tries to create a new record. 
 function is_input_empty($description, $category, $amount, $date, $type){
     if(empty($description) || empty($category) || empty ($amount) || empty($date) || empty($type)){
         return true;
@@ -9,26 +10,25 @@ function is_input_empty($description, $category, $amount, $date, $type){
     }
 }
 
-//SUPERGLOBAL => We are checking if the user runs this page on a POST request method
+//SUPERGLOBAL => We are checking if the user runs the page on a POST request method
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
-    
-    //htmlspecialchars converts into HTML entities -> prevents code injection
-    $description = htmlspecialchars($_POST["desc"]);
-    $category = htmlspecialchars($_POST["category"]);
+    //Sotring raw data from form
+    $description = $_POST["desc"];
+    $category = $_POST["category"];
     $amount = (double)$_POST["amount"];
-    $date = htmlspecialchars($_POST["date"]);
-    $type = htmlspecialchars($_POST["type"]);
+    $date = $_POST["date"];
+    $type = $_POST["type"];
 
-    
+    //Use the function above to check if any of the inputs are empty: if they are nothing will happen and the user will 
+    //be redirected to the main page.
     if(is_input_empty($description, $category, $amount, $date, $type)){
         header("Location: ../index.php");
         die();
     }
-
+    //once we have all the required input, we connect to databse, and insert those values
     try{
-        //grabbing connection to databse
+        //grabbing connection to database
         require_once "dbh.inc.php";
         $query = "INSERT INTO transactions (`description`, `category`, `amount`, `date`, `type`) 
         VALUES (?, ?, ?, ?, ?);" ;

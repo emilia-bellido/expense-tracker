@@ -1,11 +1,7 @@
-
 $(document).ready(function () {
-
-
 
     //toggle to view trasnactions
     $("#view-transaction").on("click", (e) => {
-
         let currentText = $("#button-text").text().trim();
         
         if(currentText === "Hide Recent Transactions"){
