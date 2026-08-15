@@ -11,7 +11,8 @@ try{
 
     //grabbing the result of the query from the db
     $result = $statement->fetch(PDO::FETCH_ASSOC);
-              
+    
+    //making sure the math when calculating the balance doesnt break. 
     $total_income = $result["total_income"];
     if ($total_income > 0) {
         $total_income;
@@ -20,7 +21,6 @@ try{
     }
        
     //Query to get expenses:
-
     $query = "SELECT SUM(amount) AS total_expenses FROM transactions WHERE type = 'Expense'; " ;
 
     $statement = $pdo->prepare($query);
@@ -30,6 +30,7 @@ try{
     $result = $statement->fetch(PDO::FETCH_ASSOC);
               
     $total_expenses = $result["total_expenses"];
+
     if ($total_expenses > 0) {
        $total_expenses;
     } else {
@@ -40,17 +41,10 @@ try{
     //query to calculate balance
     $total_balance = $total_income - $total_expenses;
     
+    //formatting number for front-end display
     $total_income_formatted = number_format($total_income, 2);
     $total_expenses_formatted = number_format($total_expenses, 2);
     $total_balance_formatted = number_format($total_balance, 2);
-    
-
-
-
-
-
-
-
 
 }catch(PDOException $e){
         die("Query Failed: " . $e->getMessage());
