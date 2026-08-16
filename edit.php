@@ -1,5 +1,10 @@
 <?php
-//first we need to find the record that we are looking to update.
+/**
+ * first we need to find the record that we are looking to update, 
+ * we are doing it directly on  edit.php because the query only happens on this page and it needs
+ * it to prefill the form as soon as the user opens it
+ */
+
     require "./includes/dbh.inc.php";
 
     $id = $_GET["id"];
